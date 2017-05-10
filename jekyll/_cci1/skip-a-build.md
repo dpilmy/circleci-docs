@@ -7,8 +7,11 @@ description: How to skip a build
 
 CircleCI supports the `[ci skip]` or `[skip ci]` standard for ignoring builds.
 
-CircleCI won't run the build if we find `[ci skip]` or `[skip ci]` anywhere in the commit message of the head commit.
-You can use the handy retry button on the build page if you decide that you want to run the build after all.
+CircleCI won't run the build if we find `[ci skip]` or `[skip ci]` anywhere in the commit message title (subject) or commit description (body).
+
+**Note:** the 'title' of a Git commit is the first line. The 'description' (sometimes called 'comment' or 'body') is separated from the 'title' by a blank line and can contain several lines of text. Be aware that previous commit titles may be added to the description automatically (e.g. during a rebase) and if they contain `[ci skip]` then the build will be skipped even though you didn't specify it explicitly in the 'title'.
+
+You can use the 'Rebuild' button on the build page if you decide that you want to run the build after all.
 
 ## Example
 
@@ -30,4 +33,6 @@ Date:   Wed Jan 23 16:30:24 2013 -0800
     add "Skip a build" doc
 ```
 
-Note that if the commits were in the opposite order, then the push would have been built. Currently neither `[ci skip]` nor `[skip ci]` supports fork PRs.
+Note that if the commits were in the opposite order, then the push would have been built.
+
+Currently neither `[ci skip]` nor `[skip ci]` supports fork PRs.
